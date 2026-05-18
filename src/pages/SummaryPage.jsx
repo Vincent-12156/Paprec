@@ -101,7 +101,7 @@ export default function SummaryPage() {
             onClick={registerDeparture}
             className="mt-12 w-full bg-[#8DC63F] text-white p-6 rounded-3xl text-2xl font-bold hover:opacity-90 transition"
           >
-            Confirmer le départ
+            Confirm departure
           </button>
         )}
 
@@ -110,7 +110,7 @@ export default function SummaryPage() {
             onClick={finishSession}
             className="mt-12 w-full bg-[#003B71] text-white p-6 rounded-3xl text-2xl font-bold hover:opacity-90 transition"
           >
-            Fermer la session
+            Close session
           </button>
         )}
       </div>
