@@ -32,7 +32,7 @@ export const quizQuestions = [
     question: "What should you do before unloading near a machine?",
     choices: [
       "Unload immediately",
-      "Wait until the machine is stoPeronnal Protective Equipment (PPE)",
+      "Wait until the machine is stop",
       "Signal with lights"
     ],
     answer: 1,
@@ -58,13 +58,6 @@ export const quizQuestions = [
   },
 
   {
-    question: "Can drivers ignore circulation signs?",
-    choices: ["Yes", "No", "Only during unloading"],
-    answer: 1,
-    why: "All circulation signs must be respected."
-  },
-
-  {
     question: "Are mobile ladders allowed?",
     choices: ["Yes", "Only outside", "No"],
     answer: 2,
@@ -82,7 +75,7 @@ export const quizQuestions = [
     question: "Is smoking allowed on site?",
     choices: ["Yes", "Only outdoors", "No"],
     answer: 2,
-    why: "Smoking and vaping are prohibited."
+    why: "Smoking and vaping are prohibited, due to risk of fire"
   },
 
   {
@@ -133,10 +126,10 @@ export const quizQuestions = [
   },
 
   {
-    question: "What emergency number can be called for firefighters?",
-    choices: ["15", "18", "17"],
+    question: "What emergency number can be called for emergencies?",
+    choices: ["118-218", "15 or 112", "17"],
     answer: 1,
-    why: "18 is the emergency number for firefighters in France."
+    why: " The 15 or 112 is the emergency number for emergencies in France."
   },
 
   {
@@ -239,17 +232,6 @@ export const quizQuestions = [
     ],
     answer: 1,
     why: "The site is under video surveillance."
-  },
-
-  {
-    question: "How long can surveillance images be kept?",
-    choices: [
-      "1 day",
-      "1 month",
-      "5 years"
-    ],
-    answer: 1,
-    why: "Images may be kept for one month."
   },
 
   {
