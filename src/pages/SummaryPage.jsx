@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
+import { TriangleAlert } from "lucide-react";
 import { useApp } from "../context/AppContext";
-
 import Header from "../components/Header";
 
 export default function SummaryPage() {
@@ -21,6 +20,7 @@ export default function SummaryPage() {
     setMerchandise,
     setQuizAnswers,
     setStartTime,
+    setMaterial,
   } = useApp();
 
   // first button
@@ -51,6 +51,7 @@ export default function SummaryPage() {
     setQuizAnswers([]);
     setStartTime(null);
     setEndTime(null);
+    setMaterial("");
 
     // return home
     navigate("/");
@@ -59,6 +60,29 @@ export default function SummaryPage() {
   return (
     <div className="min-h-screen p-6 md:p-10 bg-[#F4F7FA]">
       <Header title="Session Complete" />
+      {/* Waring message */}
+      <div className="max-w-4xl mx-auto mb-6">
+        <div className="bg-yellow-400 text-black p-6 rounded-3xl shadow border-l-8 border-yellow-600">
+          <div className="flex items-center gap-4 mb-3">
+            <TriangleAlert size={36} className="text-black" />
+
+            <p className="text-2xl md:text-3xl font-bold uppercase">WARNING</p>
+          </div>
+
+          <p className="text-xl md:text-2xl font-semibold">
+            Do not leave this area.
+          </p>
+
+          <p className="text-xl md:text-2xl mt-2">
+            A company representative will come and guide you to the correct
+            location.
+          </p>
+
+          <p className="text-lg md:text-xl mt-2 font-medium opacity-90">
+            Please wait until you are instructed to move.
+          </p>
+        </div>
+      </div>
 
       <div className="max-w-4xl mx-auto bg-white p-10 rounded-3xl shadow">
         <div className="space-y-5 text-2xl">

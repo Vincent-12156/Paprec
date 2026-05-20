@@ -28,15 +28,13 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#F4F7FA] p-6 md:p-10">
       <Header title="Select Language" />
-
       <ProgressBar step={1} />
-
       <div className="max-w-6xl mx-auto">
         {/* Search Bar */}
         <div className="relative mb-10">
           <Search
             size={30}
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
+            className="absolute left-5 top-1/2 -translate-y-1/2 text-red-500"
           />
 
           <input

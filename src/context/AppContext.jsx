@@ -9,6 +9,8 @@ export function AppProvider({ children }) {
   const [profile, setProfile] = useState(null);
   const [vehicle, setVehicle] = useState("");
   const [merchandise, setMerchandise] = useState("");
+  const [material, setMaterial] = useState("");
+
   const [quizAnswers, setQuizAnswers] = useState([]);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -23,6 +25,7 @@ export function AppProvider({ children }) {
       setProfile(data.profile);
       setVehicle(data.vehicle);
       setMerchandise(data.merchandise);
+      setMaterial(data.material || "");
       setQuizAnswers(data.quizAnswers || []);
       setStartTime(data.startTime);
       setEndTime(data.endTime);
@@ -37,6 +40,7 @@ export function AppProvider({ children }) {
         profile,
         vehicle,
         merchandise,
+        material,
         quizAnswers,
         startTime,
         endTime,
@@ -47,6 +51,7 @@ export function AppProvider({ children }) {
     profile,
     vehicle,
     merchandise,
+    material,
     quizAnswers,
     startTime,
     endTime,
@@ -63,6 +68,8 @@ export function AppProvider({ children }) {
         setVehicle,
         merchandise,
         setMerchandise,
+        material,
+        setMaterial,
         quizAnswers,
         setQuizAnswers,
         startTime,
