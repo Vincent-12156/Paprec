@@ -10,93 +10,58 @@ import ProgressBar from "../components/ProgressBar";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-
   const navigate = useNavigate();
 
-  const { setLanguage, setStartTime } = useApp();
+  const { updateSession } = useApp();
 
   const filtered = languages.filter((lang) =>
     lang.name.toLowerCase().includes(search.toLowerCase()),
   );
 
   const selectLanguage = (lang) => {
-    setLanguage(lang);
-    setStartTime(new Date().toLocaleString());
-    navigate("/search");
+    updateSession({
+      language: lang,
+      startTime: new Date().toLocaleString(),
+      sessionType: "entry",
+    });
+
+    navigate("/session-type");
   };
 
   return (
     <div className="min-h-screen bg-[#F4F7FA] p-6 md:p-10">
       <Header title="Select Language" />
       <ProgressBar step={1} />
-      <div className="max-w-6xl mx-auto">
-        {/* Search Bar */}
-        <div className="relative mb-10">
-          <Search
-            size={30}
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400"
-          />
 
+      <div className="max-w-6xl mx-auto">
+        <div className="relative mb-10">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
-            type="text"
-            placeholder="Search language..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="
-              w-full
-              pl-16
-              pr-6
-              py-5
-              rounded-3xl
-              border-2
-              border-gray-300
-              bg-white
-              text-2xl
-              shadow-sm
-              focus:outline-none
-              focus:border-[#003B71]
-            "
+            placeholder="Search language..."
+            className="w-full pl-16 py-5 rounded-3xl border bg-white text-2xl"
           />
         </div>
 
-        {/* Language Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {filtered.map((lang) => (
-            <button
-              key={lang.code}
+            <div
+              key={lang.name}
               onClick={() => selectLanguage(lang)}
-              className="
-                relative
-                overflow-hidden
-                rounded-xl
-                shadow-xl
-                aspect-[16/10]
-                hover:scale-105
-                transition
-                cursor-pointer
-              "
+              className="relative overflow-hidden cursor-pointer aspect-[16/9] rounded-3xl shadow"
             >
-              {/* Background Flag */}
               <img
                 src={lang.image}
-                alt={lang.name}
-                className="
-                  absolute
-                  inset-0
-                  w-full
-                  h-full
-                  object-cover
-                  brightness-75
-                "
+                className="absolute inset-0 w-full h-full object-cover brightness-95"
               />
 
-              {/* Text */}
-              <div className="relative z-10 flex items-end justify-center h-full p-4">
-                <span className="text-white text-3xl font-bold drop-shadow-lg">
+              <div className="relative z-10 h-full flex items-end justify-center p-4 bg-black/10">
+                <span className="text-white text-3xl font-bold">
                   {lang.name}
                 </span>
               </div>
-            </button>
+            </div>
           ))}
         </div>
       </div>

@@ -8,6 +8,8 @@ import QuizPage from "../pages/QuizPage";
 import SummaryPage from "../pages/SummaryPage";
 import NewDriverPage from "../pages/NewDriverPage";
 import EditDriverPage from "../pages/EditDriverPage";
+import SessionTypePage from "../pages/SessionTypePage";
+import DeparturePage from "../pages/DeparturePage";
 
 export default function AppRouter() {
   return (
@@ -20,6 +22,8 @@ export default function AppRouter() {
       <Route path="/summary" element={<SummaryPage />} />
       <Route path="/new-driver" element={<NewDriverPage />} />
       <Route path="/edit-driver" element={<EditDriverPage />} />
+      <Route path="/session-type" element={<SessionTypePage />} />
+      <Route path="/departure" element={<DeparturePage />} />
     </Routes>
   );
 }

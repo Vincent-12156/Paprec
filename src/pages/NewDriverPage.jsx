@@ -6,7 +6,7 @@ import Header from "../components/Header";
 
 export default function NewDriverPage() {
   const navigate = useNavigate();
-  const { setProfile } = useApp();
+  const { updateSession } = useApp();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -20,7 +20,7 @@ export default function NewDriverPage() {
       company,
     };
 
-    setProfile(newDriver);
+    updateSession({ profile: newDriver });
     navigate("/vehicle");
   };
 

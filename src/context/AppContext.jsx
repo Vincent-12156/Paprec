@@ -1,81 +1,53 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const AppContext = createContext();
+const AppContext = createContext(null);
 
 export const useApp = () => useContext(AppContext);
 
+const defaultSession = {
+  language: null,
+  profile: null,
+  vehicle: null,
+  merchandise: null,
+  material: null,
+  quizAnswers: [],
+  startTime: null,
+  endTime: null,
+  sessionType: "",
+};
+
 export function AppProvider({ children }) {
-  const [language, setLanguage] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [vehicle, setVehicle] = useState("");
-  const [merchandise, setMerchandise] = useState("");
-  const [material, setMaterial] = useState("");
+  const [session, setSession] = useState(defaultSession);
 
-  const [quizAnswers, setQuizAnswers] = useState([]);
-  const [startTime, setStartTime] = useState(null);
-  const [endTime, setEndTime] = useState(null);
-
+  // LOAD
   useEffect(() => {
     const saved = localStorage.getItem("paprec-session");
-
     if (saved) {
-      const data = JSON.parse(saved);
-
-      setLanguage(data.language);
-      setProfile(data.profile);
-      setVehicle(data.vehicle);
-      setMerchandise(data.merchandise);
-      setMaterial(data.material || "");
-      setQuizAnswers(data.quizAnswers || []);
-      setStartTime(data.startTime);
-      setEndTime(data.endTime);
+      try {
+        setSession(JSON.parse(saved));
+      } catch {
+        setSession(defaultSession);
+      }
     }
   }, []);
 
+  // SAVE
   useEffect(() => {
-    localStorage.setItem(
-      "paprec-session",
-      JSON.stringify({
-        language,
-        profile,
-        vehicle,
-        merchandise,
-        material,
-        quizAnswers,
-        startTime,
-        endTime,
-      }),
-    );
-  }, [
-    language,
-    profile,
-    vehicle,
-    merchandise,
-    material,
-    quizAnswers,
-    startTime,
-    endTime,
-  ]);
+    localStorage.setItem("paprec-session", JSON.stringify(session));
+  }, [session]);
+
+  const updateSession = (updates) => {
+    setSession((prev) => ({
+      ...prev,
+      ...updates,
+    }));
+  };
 
   return (
     <AppContext.Provider
       value={{
-        language,
-        setLanguage,
-        profile,
-        setProfile,
-        vehicle,
-        setVehicle,
-        merchandise,
-        setMerchandise,
-        material,
-        setMaterial,
-        quizAnswers,
-        setQuizAnswers,
-        startTime,
-        setStartTime,
-        endTime,
-        setEndTime,
+        session,
+        updateSession,
       }}
     >
       {children}

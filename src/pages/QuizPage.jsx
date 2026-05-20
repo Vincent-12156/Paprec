@@ -11,23 +11,32 @@ import QuizQuestion from "../components/QuizQuestion";
 export default function QuizPage() {
   const navigate = useNavigate();
 
-  const { quizAnswers, setQuizAnswers } = useApp();
+  const { session, updateSession } = useApp();
+
+  const quizAnswers = session.quizAnswers || [];
+  const language = session.language;
+
+  const speechLang = language?.speech_name || "en-GB";
+
   const [showErrors, setShowErrors] = useState(false);
 
+  const randomQuestions = useMemo(() => {
+    return [...quizQuestions].sort(() => Math.random() - 0.5).slice(0, 3);
+  }, []);
+
   useEffect(() => {
-    setQuizAnswers([]);
+    updateSession({ quizAnswers: [] });
   }, []);
 
   const selectAnswer = (questionIndex, answerIndex) => {
     const updated = [...quizAnswers];
     updated[questionIndex] = answerIndex;
-    setQuizAnswers(updated);
+    updateSession({ quizAnswers: updated });
   };
 
   const validate = () => {
     const hasError = randomQuestions.some(
-      (question, index) =>
-        Number(quizAnswers[index]) !== question.answer
+      (question, index) => Number(quizAnswers[index]) !== question.answer,
     );
 
     if (hasError) {
@@ -35,25 +44,24 @@ export default function QuizPage() {
       return;
     }
 
-    window.alert("You passed the quiz ! You can now sign.");
     navigate("/summary");
   };
 
-  const randomQuestions = useMemo(() => {
-    return [...quizQuestions]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3);
-  }, []);
-
   const allAnswered =
-    quizAnswers.filter(
-      (answer) => answer !== undefined
-    ).length === randomQuestions.length;
+    quizAnswers.filter((a) => a !== undefined).length ===
+    randomQuestions.length;
+
+  const lireTexte = () => {
+    const utterance = new SpeechSynthesisUtterance(document.body.innerText);
+
+    utterance.lang = speechLang;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utterance);
+  };
 
   return (
     <div className="min-h-screen p-6 md:p-10 bg-[#F4F7FA]">
-      <Header title="Safety Quiz" />
-
+      <Header title="Safety quiz" />
       <ProgressBar step={5} />
 
       <div className="max-w-5xl mx-auto">
@@ -64,32 +72,28 @@ export default function QuizPage() {
             selected={quizAnswers[index]}
             onSelect={(answer) => selectAnswer(index, answer)}
             showError={
-              showErrors &&
-              Number(quizAnswers[index]) !==
-                question.answer
+              showErrors && Number(quizAnswers[index]) !== question.answer
             }
-            locked={showErrors}
           />
         ))}
 
         <button
-          disabled={!allAnswered && !showErrors}
-          onClick={() => {
-            if (showErrors) {
-              navigate("/safety");
-            } else {
-              validate();
-            }
-          }}
+          onClick={lireTexte}
+          className="w-full mb-4 p-4 rounded-2xl bg-green-600 text-white font-bold"
+        >
+          🔊 Lire la page
+        </button>
+
+        <button
+          disabled={!allAnswered}
+          onClick={validate}
           className={`w-full p-6 rounded-3xl text-2xl font-bold transition ${
-            !allAnswered && !showErrors
-              ? "bg-gray-400 cursor-not-allowed text-white"
+            !allAnswered
+              ? "bg-gray-400 cursor-not-allowed"
               : "bg-[#003B71] text-white hover:bg-[#002952]"
           }`}
         >
-          {showErrors
-            ? "Return to safety rules"
-            : "Validate"}
+          Validate
         </button>
       </div>
     </div>

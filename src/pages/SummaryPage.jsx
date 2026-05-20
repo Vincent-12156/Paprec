@@ -1,68 +1,20 @@
+
 import { useNavigate } from "react-router-dom";
 import { TriangleAlert } from "lucide-react";
+
 import { useApp } from "../context/AppContext";
 import Header from "../components/Header";
 
 export default function SummaryPage() {
   const navigate = useNavigate();
-
-  const {
-    language,
-    profile,
-    vehicle,
-    merchandise,
-    startTime,
-    endTime,
-    setEndTime,
-    setLanguage,
-    setProfile,
-    setVehicle,
-    setMerchandise,
-    setQuizAnswers,
-    setStartTime,
-    setMaterial,
-  } = useApp();
-
-  // first button
-  const registerDeparture = () => {
-    const departureTime = new Date().toLocaleString();
-    setEndTime(departureTime);
-  };
-
-  // second button
-  const finishSession = () => {
-    console.log({
-      language,
-      profile,
-      vehicle,
-      merchandise,
-      startTime,
-      endTime,
-    });
-
-    // clear storage
-    localStorage.removeItem("paprec-session");
-
-    // reset context
-    setLanguage(null);
-    setProfile(null);
-    setVehicle("");
-    setMerchandise("");
-    setQuizAnswers([]);
-    setStartTime(null);
-    setEndTime(null);
-    setMaterial("");
-
-    // return home
-    navigate("/");
-  };
+  const { session } = useApp();
 
   return (
-    <div className="min-h-screen p-6 md:p-10 bg-[#F4F7FA]">
-      <Header title="Session Complete" />
-      {/* Waring message */}
-      <div className="max-w-4xl mx-auto mb-6">
-        <div className="bg-yellow-400 text-black p-6 rounded-3xl shadow border-l-8 border-yellow-600">
+    <div className="min-h-screen p-10 bg-[#F4F7FA]">
+      <Header title="Summary" />
+
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-yellow-400 text-black p-6 rounded-3xl shadow border-l-8 border-yellow-600 mb-6">
           <div className="flex items-center gap-4 mb-3">
             <TriangleAlert size={36} className="text-black" />
 
@@ -82,61 +34,28 @@ export default function SummaryPage() {
             Please wait until you are instructed to move.
           </p>
         </div>
-      </div>
 
-      <div className="max-w-4xl mx-auto bg-white p-10 rounded-3xl shadow">
-        <div className="space-y-5 text-2xl">
+        <div className="bg-white p-10 rounded-3xl text-2xl space-y-4">
+          <p>Language: {session.language?.name}</p>
           <p>
-            <strong>Language:</strong> {language?.name}
+            Name: {session.profile?.firstName} {session.profile?.lastName}
           </p>
+          <p>Company: {session.profile?.company}</p>
 
-          <p>
-            <strong>Name:</strong> {profile?.lastName}
-          </p>
+          <p>Vehicle: {session.vehicle}</p>
+          <p>Packaging: {session.merchandise}</p>
+          <p>Material: {session.material}</p>
 
-          <p>
-            <strong>First Name:</strong> {profile?.firstName}
-          </p>
-
-          <p>
-            <strong>Company:</strong> {profile?.company}
-          </p>
-
-          <p>
-            <strong>Vehicle:</strong> {vehicle}
-          </p>
-
-          <p>
-            <strong>Merchandise:</strong> {merchandise}
-          </p>
-
-          <p>
-            <strong>Arrival:</strong> {startTime}
-          </p>
-
-          <p>
-            <strong>Departure:</strong>{" "}
-            {endTime ? endTime : "Not registered yet"}
-          </p>
+          <p>Arrival: {session.startTime || "Not set"}</p>
+          <p>Departure: {session.endTime || "Not set"}</p>
         </div>
 
-        {!endTime && (
-          <button
-            onClick={registerDeparture}
-            className="mt-12 w-full bg-[#8DC63F] text-white p-6 rounded-3xl text-2xl font-bold hover:opacity-90 transition"
-          >
-            Confirm departure
-          </button>
-        )}
-
-        {endTime && (
-          <button
-            onClick={finishSession}
-            className="mt-12 w-full bg-[#003B71] text-white p-6 rounded-3xl text-2xl font-bold hover:opacity-90 transition"
-          >
-            Close session
-          </button>
-        )}
+        <button
+          onClick={() => navigate("/")}
+          className="mt-10 w-full bg-[#003B71] text-white p-6 rounded-3xl"
+        >
+          Back Home
+        </button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 export default function ProgressBar({ step }) {
-  const width = `${(step / 5) * 100}%`;
+  const width = `${(step / 6) * 100}%`;
 
   return (
     <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
