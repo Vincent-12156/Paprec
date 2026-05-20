@@ -32,7 +32,7 @@ export const quizQuestions = [
     question: "What should you do before unloading near a machine?",
     choices: [
       "Unload immediately",
-      "Wait until the machine is stoPeronnal Protective Equipment (PPE)d",
+      "Wait until the machine is stoPeronnal Protective Equipment (PPE)",
       "Signal with lights"
     ],
     answer: 1,
