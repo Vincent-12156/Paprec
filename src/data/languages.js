@@ -1,11 +1,16 @@
-import france from "../assets/flags/france.jpg";
-import spain from "../assets/flags/spain.jpg";
-import portugal from "../assets/flags/portugal.jpg";
-import italy from "../assets/flags/italy.jpg";
-import germany from "../assets/flags/germany.jpg";
-import russia from "../assets/flags/russia.jpg";
-import ukraine from "../assets/flags/ukraine.jpg";
-import poland from "../assets/flags/poland.jpg";
+import france from "../assets/flags/France.svg";
+import spain from "../assets/flags/Spain.svg";
+import portugal from "../assets/flags/Portugal.svg";
+import italy from "../assets/flags/Italy.svg";
+import germany from "../assets/flags/Germany.svg";
+import russia from "../assets/flags/Russia.svg";
+import ukraine from "../assets/flags/Ukraine.svg";
+import poland from "../assets/flags/Poland.svg";
+import croatia from "../assets/flags/Croatia.svg";
+import lithuania from "../assets/flags/Lithuania.svg";
+import uk from "../assets/flags/United Kingdom.svg";
+import romania from "../assets/flags/Romania.svg";
+
 
 export const languages = [
   {
