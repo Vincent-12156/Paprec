@@ -34,7 +34,7 @@ export default function Home() {
         <div className="relative mb-10">
           <Search
             size={30}
-            className="absolute left-5 top-1/2 -translate-y-1/2 text-red-500"
+            className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400"
           />
 
           <input
@@ -68,11 +68,10 @@ export default function Home() {
               className="
                 relative
                 overflow-hidden
-                rounded-3xl
+                rounded-xl
                 shadow-xl
-                min-h-[240px]
+                aspect-[16/10]
                 hover:scale-105
-                active:scale-95
                 transition
                 cursor-pointer
               "
@@ -87,14 +86,12 @@ export default function Home() {
                   w-full
                   h-full
                   object-cover
+                  brightness-75
                 "
               />
 
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black/25" />
-
-              {/* Content */}
-              <div className="relative z-10 flex items-end justify-center h-full">
+              {/* Text */}
+              <div className="relative z-10 flex items-end justify-center h-full p-4">
                 <span className="text-white text-3xl font-bold drop-shadow-lg">
                   {lang.name}
                 </span>

@@ -11,46 +11,53 @@ import lithuania from "../assets/flags/Lithuania.svg";
 import uk from "../assets/flags/United Kingdom.svg";
 import romania from "../assets/flags/Romania.svg";
 
-
 export const languages = [
   {
-    code: "fr",
     name: "Français",
     image: france,
   },
   {
-    code: "es",
     name: "Español",
     image: spain,
   },
   {
-    code: "pt",
     name: "Português",
     image: portugal,
   },
   {
-    code: "it",
     name: "Italiano",
     image: italy,
   },
   {
-    code: "de",
     name: "Deutsch",
     image: germany,
   },
   {
-    code: "ru",
     name: "Русский",
     image: russia,
   },
   {
-    code: "ua",
     name: "Українська",
     image: ukraine,
   },
   {
-    code: "pl",
     name: "Polski",
     image: poland,
+  },
+  {
+    name: "Hrvatski",
+    image: croatia,
+  },
+  {
+    name: "Lietuvių",
+    image: lithuania,
+  },
+  {
+    name: "English",
+    image: uk,
+  },
+  {
+    name: "Română",
+    image: romania,
   },
 ];
