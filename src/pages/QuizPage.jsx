@@ -35,7 +35,6 @@ export default function QuizPage() {
       return;
     }
 
-    window.alert("You passed the quiz ! You can now sign.");
     navigate("/summary");
   };
 
