@@ -45,6 +45,11 @@ export default function QuizPage() {
       .slice(0, 3);
   }, []);
 
+  const allAnswered =
+    quizAnswers.filter(
+      (answer) => answer !== undefined
+    ).length === randomQuestions.length;
+
   return (
     <div className="min-h-screen p-6 md:p-10 bg-[#F4F7FA]">
       <Header title="Safety Quiz" />
@@ -68,6 +73,7 @@ export default function QuizPage() {
         ))}
 
         <button
+          disabled={!allAnswered && !showErrors}
           onClick={() => {
             if (showErrors) {
               navigate("/safety");
@@ -75,7 +81,11 @@ export default function QuizPage() {
               validate();
             }
           }}
-          className="w-full bg-[#003B71] text-white p-6 rounded-3xl text-2xl font-bold"
+          className={`w-full p-6 rounded-3xl text-2xl font-bold transition ${
+            !allAnswered && !showErrors
+              ? "bg-gray-400 cursor-not-allowed text-white"
+              : "bg-[#003B71] text-white hover:bg-[#002952]"
+          }`}
         >
           {showErrors
             ? "Return to safety rules"

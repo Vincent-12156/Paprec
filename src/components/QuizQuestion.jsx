@@ -19,7 +19,7 @@ export default function QuizQuestion({
             onClick={() => onSelect(index)}
             className={`p-4 rounded-xl border text-left ${
               selected === index
-                ? "bg-blue-500 text-white"
+                ? "bg-[#8DC63F] text-white"
                 : "bg-gray-100"
             }`}
           >
