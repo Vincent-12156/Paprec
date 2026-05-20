@@ -11,7 +11,9 @@ import QuizQuestion from "../components/QuizQuestion";
 export default function QuizPage() {
   const navigate = useNavigate();
 
-  const { quizAnswers, setQuizAnswers } = useApp();
+  const { quizAnswers, setQuizAnswers, language } = useApp();
+  const speechLang = language?.speech_name || "en-GB";
+  console.log("language object:", language);
   const [showErrors, setShowErrors] = useState(false);
 
   useEffect(() => {
@@ -49,9 +51,23 @@ export default function QuizPage() {
       (answer) => answer !== undefined
     ).length === randomQuestions.length;
 
+  const lireTexte = () => {
+  const texte = document.body.innerText;
+
+  const utterance = new SpeechSynthesisUtterance(texte);
+
+  utterance.lang = speechLang;
+  console.log("language:", speechLang);
+  utterance.rate = 1;
+  utterance.pitch = 1;
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utterance);
+};
+
   return (
     <div className="min-h-screen p-6 md:p-10 bg-[#F4F7FA]">
-      <Header title="Safety Quiz" />
+      <Header title="Safety quiz" />
 
       <ProgressBar step={5} />
 
@@ -70,6 +86,13 @@ export default function QuizPage() {
             locked={showErrors}
           />
         ))}
+
+        <button
+        onClick={lireTexte}
+        className="w-full mb-4 p-4 rounded-2xl bg-green-600 text-white font-bold hover:bg-green-700"
+      >
+        🔊 Lire la page
+      </button>
 
         <button
           disabled={!allAnswered && !showErrors}
