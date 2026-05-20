@@ -58,7 +58,7 @@ export default function VehiclePage() {
         <h2 className="text-2xl font-bold mb-4">Packaging Type</h2>
 
         <div className="grid grid-cols-2 gap-6 mb-10">
-          {merchandiseOptions.map((m) => (
+          {["Bale", "Bulk"].map((m) => (
             <button
               key={m}
               onClick={() => setMerchandise(m)}
