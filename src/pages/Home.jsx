@@ -21,6 +21,7 @@ export default function Home() {
 
   const selectLanguage = (lang) => {
     setLanguage(lang);
+      localStorage.setItem("language", lang.code);
     setStartTime(new Date().toLocaleString());
     navigate("/search");
   };

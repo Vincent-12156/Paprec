@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";
 import ProgressBar from "../components/ProgressBar";
+import safetyLanguages from "../data/safetyLanguages";
 
 import risqueImg from "../assets/picto/Risque identifiés.png";
 import obligationsImg from "../assets/picto/Obligations.png";
@@ -48,78 +49,71 @@ export default function SafetyPage() {
 
   const [checked, setChecked] = useState(false);
 
+   const currentLanguage =
+    localStorage.getItem("language") || "fr";
+
+  const content =
+    safetyLanguages[currentLanguage] ||
+    safetyLanguages.fr;
+
   return (
     <div className="min-h-screen p-6 md:p-10 bg-[#F4F7FA]">
-      <Header title="Safety Rules" />
+      <Header title={content.pageTitle} />
 
       <ProgressBar step={4} />
 
       <div className="max-w-7xl mx-auto bg-white p-8 rounded-3xl shadow">
         {/* TOP BOXES */}
         <div className="flex gap-5 mb-10">
-          <Box
-            title="Liste des risques identifiés"
-            color="border-green-500"
-            image={risqueImg}
-            items={[
-              "• Risque de chute de hauteur",
-              "• Risque lié à la coactivité",
-              "• Risque de chute d'objet",
-              "• Risque incendie",
-              "• Risque écrasement",
-            ]}
-          />
+  <Box
+    title={content.boxes.risks.title}
+    color="border-green-500"
+    image={risqueImg}
+    items={content.boxes.risks.items}
+  />
 
-          <Box
-            title="Liste des obligations"
-            color="border-blue-500"
-            image={obligationsImg}
-            items={[
-              "• Port des EPI obligatoire",
-              "• Respect du sens de circulation",
-              "• Respect des limitations",
-              "• Priorité aux engins",
-              "• Seul le conducteur descend",
-            ]}
-          />
+  <Box
+    title={content.boxes.obligations.title}
+    color="border-blue-500"
+    image={obligationsImg}
+    items={content.boxes.obligations.items}
+  />
 
-          <Box
-            title="Liste des interdictions"
-            color="border-red-500"
-            image={interdictionImg}
-            items={[
-              "• Échelles mobiles interdites",
-              "• Interdiction de monter dans la remorque",
-              "• Interdiction de fumer",
-              "• Interdiction de courir",
-              "• Alcool et drogue interdits",
-            ]}
-          />
+  <Box
+    title={content.boxes.prohibitions.title}
+    color="border-red-500"
+    image={interdictionImg}
+    items={content.boxes.prohibitions.items}
+  />
+</div>
         </div>
 
         {/* RULES */}
-        <h2 className="text-center text-4xl font-bold mb-6">
-          Consignes générales à respecter
-        </h2>
+<h2 className="text-center text-4xl font-bold mb-6">
+  {content.rulesTitle}
+</h2>
 
-        <div className="flex gap-4 flex-wrap mb-10">
-          <Rule
-            image={consigne1Img}
-            text="Respecter la limitation de vitesse."
-          />
+<div className="flex gap-4 flex-wrap mb-10">
+  <Rule
+    image={consigne1Img}
+    text={content.rules[0]}
+  />
 
-          <Rule image={consigne2Img} text="Laisser la priorité aux engins." />
+  <Rule
+    image={consigne2Img}
+    text={content.rules[1]}
+  />
 
-          <Rule
-            image={consigne3Img}
-            text="Seul le conducteur peut descendre."
-          />
+  <Rule
+    image={consigne3Img}
+    text={content.rules[2]}
+  />
 
-          <Rule
-            image={consigne4Img}
-            text="Respecter le sens de circulation."
-          />
-        </div>
+  <Rule
+    image={consigne4Img}
+    text={content.rules[3]}
+  />
+</div>
 
         {/* CHECKBOX */}
         <div className="p-6 bg-gray-100 rounded-[20px] text-center">
@@ -130,7 +124,7 @@ export default function SafetyPage() {
               onChange={() => setChecked(!checked)}
               className="w-6 h-6"
             />
-            J'ai bien pris connaissance des règles de sécurité
+            {content.checkboxText}
           </label>
 
           <button
@@ -139,20 +133,17 @@ export default function SafetyPage() {
             className={`px-10 py-5 rounded-2xl text-white text-2xl font-bold transition
               ${checked ? "bg-[#07295f]" : "bg-gray-400"}`}
           >
-            Continuer
+            {content.buttonText}
           </button>
         </div>
 
         {/* FOOTER */}
         <footer className="mt-10 text-center text-sm text-gray-500">
-          NOTA 1 : Après chargement/déchargement, le chauffeur doit vérifier la
-          propreté de la zone.
-          <br />
-          <br />
-          NOTA 2 : L’entreprise d’accueil peut refuser l’opération si le
-          comportement ou le véhicule présente un danger.
+         {content.footer.nota1}
+<br />
+<br />
+{content.footer.nota2}
         </footer>
       </div>
-    </div>
   );
 }

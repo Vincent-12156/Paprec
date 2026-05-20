@@ -44,7 +44,7 @@ export const languages = [
     image: russia,
   },
   {
-    code: "ua",
+    code: "uk",
     name: "Українська",
     image: ukraine,
   },
